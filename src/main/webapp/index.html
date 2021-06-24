@@ -119,34 +119,22 @@
 					<th>发表时间</th>
 					<th>浏览量</th>
 				</tr>
-				<tr>
+				<!--/*@thymesVar id="popularBlogs" type="com.blog.bean.Blog"*/-->
+				<tr th:each="p:${popularBlogs}">
 					<td>
-						<a href="#">作者：富兰克林
-							<a>
+						<!--/*@thymesVar id="author" type="com.blog.bean.Blog.author"*/-->
+						<a th:text="${p.author.username}" th:href="${#servletContext.contextPath}+'author.do?id='+${p.author.id}">这是一个什么都没有的东西</a>
 					</td>
 					<td>
-						<a href="#">标题：博客标题博客标题博客标题博客标题博客标题博客标题博客标题</a>
+						<a th:text="${p.title}" th:href="${#servletContext.contextPath}+'title.do?title='+${p.id}" >这是一个什么都没有的东西</a>
 					</td>
 					<td>
-						<a href="#">原创</a>
+						<a th:text="${p.kind}" th:href="${#servletContext.contextPath}+'kind.do?kind='+${p.kind}" >这是一个什么都没有的东西</a>
 					</td>
-					<td>2016-12-22</td>
-					<td>267</td>
+					<td th:text="${p.creationTime}" >这是一个什么都没有的东西</td>
+					<td th:text="${p.pageView}">这是一个什么都没有的东西</td>
 				</tr>
-				<tr>
-					<td>
-						<a href="#">作者：富兰克林
-							<a>
-					</td>
-					<td>
-						<a href="#">标题：博客标题博客标题博客标题博客标题博客标题博客标题博客标题</a>
-					</td>
-					<td>
-						<a href="#">原创</a>
-					</td>
-					<td>2016-12-22</td>
-					<td>267</td>
-				</tr>
+
 
 			</table>
 
@@ -160,118 +148,22 @@
 					<th>发表时间</th>
 					<th>浏览量</th>
 				</tr>
-				<tr>
+				<!--/*@thymesVar id="bolgList" type="com"*/-->
+				<tr th:each="p:${bolgList}">
 					<td>
-						<a href="#">作者：富兰克林
-							<a>
+						<!--/*@thymesVar id="author" type="com.blog.bean.Blog.author"*/-->
+						<a th:text="${p.author.username}" th:href="${#servletContext.contextPath}+'author.do?id='+${p.author.id}">这是一个什么都没有的东西</a>
 					</td>
 					<td>
-						<a href="#">标题：博客标题博客标题博客标题博客标题博客标题博客标题博客标题</a>
+						<a th:text="${p.title}" th:href="${#servletContext.contextPath}+'title.do?title='+${p.id}" >这是一个什么都没有的东西</a>
 					</td>
 					<td>
-						<a href="#">原创</a>
+						<a th:text="${p.kind}" th:href="${#servletContext.contextPath}+'kind.do?kind='+${p.kind}" >这是一个什么都没有的东西</a>
 					</td>
-					<td>2016-12-22</td>
-					<td>267</td>
+					<td th:text="${p.creationTime}" >这是一个什么都没有的东西</td>
+					<td th:text="${p.pageView}">这是一个什么都没有的东西</td>
 				</tr>
-				<tr>
-					<td>
-						<a href="#">作者：富兰克林
-							<a>
-					</td>
-					<td>
-						<a href="#">标题：博客标题博客标题博客标题博客标题博客标题博客标题博客标题</a>
-					</td>
-					<td>
-						<a href="#">原创</a>
-					</td>
-					<td>2016-12-22</td>
-					<td>267</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="#">作者：富兰克林
-							<a>
-					</td>
-					<td>
-						<a href="#">标题：博客标题博客标题博客标题博客标题博客标题博客标题博客标题</a>
-					</td>
-					<td>
-						<a href="#">原创</a>
-					</td>
-					<td>2016-12-22</td>
-					<td>267</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="#">作者：富兰克林
-							<a>
-					</td>
-					<td>
-						<a href="#">标题：博客标题博客标题博客标题博客标题博客标题博客标题博客标题</a>
-					</td>
-					<td>
-						<a href="#">原创</a>
-					</td>
-					<td>2016-12-22</td>
-					<td>267</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="#">作者：富兰克林
-							<a>
-					</td>
-					<td>
-						<a href="#">标题：博客标题博客标题博客标题博客标题博客标题博客标题博客标题</a>
-					</td>
-					<td>
-						<a href="#">原创</a>
-					</td>
-					<td>2016-12-22</td>
-					<td>267</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="#">作者：富兰克林
-							<a>
-					</td>
-					<td>
-						<a href="#">标题：博客标题博客标题博客标题博客标题博客标题博客标题博客标题</a>
-					</td>
-					<td>
-						<a href="#">原创</a>
-					</td>
-					<td>2016-12-22</td>
-					<td>267</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="#">作者：富兰克林
-							<a>
-					</td>
-					<td>
-						<a href="#">标题：博客标题博客标题博客标题博客标题博客标题博客标题博客标题</a>
-					</td>
-					<td>
-						<a href="#">原创</a>
-					</td>
-					<td>2016-12-22</td>
-					<td>267</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="#">作者：富兰克林
-							<a>
-					</td>
-					<td>
-						<a href="#">标题：博客标题博客标题博客标题博客标题博客标题博客标题博客标题</a>
-					</td>
-					<td>
-						<a href="#">原创</a>
-					</td>
-					<td>2016-12-22</td>
-					<td>267</td>
-				</tr>
+				
 			</table>
 		</div>
 		<!-- 脚部 -->

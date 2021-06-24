@@ -1,2 +1,0 @@
-com.blog.config.SpringConfig=org.springframework.stereotype.Component
-com.blog.config.SpringMVCConfig=org.springframework.stereotype.Component

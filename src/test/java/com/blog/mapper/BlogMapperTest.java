@@ -12,24 +12,24 @@ public class BlogMapperTest extends TestCase {
     AccountMapper accountMapper= (AccountMapper) new AnnotationConfigApplicationContext(SpringMVCConfig.class).getBean("accountMapper");
 
     public void testSelectAllStudent() {
-        System.out.println(blogMapper.selectAllStudent());
+        System.out.println(blogMapper.selectAllBlog());
     }
 
     public void testSelectTop5Student() {
-        System.out.println(blogMapper.selectTop5Student());
+        System.out.println(blogMapper.selectTop5Blog());
     }
 
     public void testSelectTop10Student() {
-        System.out.println(blogMapper.selectTop10Student());
+        System.out.println(blogMapper.selectTop10Blog());
 
     }
 
     public void testSelectTimeSequenceStudent() {
-        System.out.println(blogMapper.selectTimeSequenceStudent());
+        System.out.println(blogMapper.selectTimeSequenceBlog());
     }
 
     public void testSelectStudentById() {
-        System.out.println(blogMapper.selectStudentById(2l));
+        System.out.println(blogMapper.selectBlogById(2l));
     }
 
     public void testSelectStudentByAccountId() {
@@ -40,15 +40,11 @@ public class BlogMapperTest extends TestCase {
         System.out.println(blogMapper.selectStudentByKind("dsa"));
     }
 
-    public void testInsertBlog() {
-        blogMapper.insertBlog(new Blog("title","kind","schema","content",accountMapper.selectById(2l),new Timestamp(System.currentTimeMillis())));
-    }
+
 
     public void testDeleteBolg() {
         System.out.println(blogMapper.deleteBolg(2l));
     }
 
-    public void testUpdateBlog() {
-        blogMapper.updateBlog(new Blog(3l,"title","kind","schema","content",accountMapper.selectById(2l),new Timestamp(System.currentTimeMillis())));
-    }
+
 }

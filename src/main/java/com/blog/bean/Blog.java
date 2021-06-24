@@ -7,7 +7,6 @@ public class Blog implements Serializable {
     private Long id;
     private String title;
     private String kind;
-
     private String schema;
     private Long pageView;
     private Account author;
@@ -118,22 +117,21 @@ public class Blog implements Serializable {
         this.modification = modification;
         this.content = content;
     }
-    public Blog( String title, String kind, String schema, String content,  Account author, Timestamp creationTime) {
+    public Blog( String title, String kind, String schema, String content,  Account author, Timestamp creationTime,Long pageView) {
         this.title = title;
         this.kind = kind;
         this.schema = schema;
         this.author = author;
         this.creationTime = creationTime;
         this.content = content;
+        this.pageView=pageView;
     }
-    public Blog(Long id, String title, String kind, String schema, String content,  Account author, Timestamp creationTime) {
+    public Blog(Long id, String kind, String schema, String content, Timestamp modification) {
         this.id=id;
-        this.title = title;
         this.kind = kind;
         this.schema = schema;
-        this.author = author;
-        this.creationTime = creationTime;
         this.content = content;
+        this.modification=modification;
     }
 
 
