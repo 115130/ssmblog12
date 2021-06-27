@@ -14,68 +14,12 @@
 
 	<body>
 		<!--导航栏盒子-->
-		<div class="d1">
-			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-				<div class="container-fluid allwidth">
-					<div class="navbar-header">
-						<a class="navbar-brand" href="#">欢迎来到博客园</a>
-					</div>
-					<div>
-						<ul class="nav navbar-nav">
-							<li class="active">
-								<a href="index.html">网站首页</a>
-							</li>
-							<li>
-								<a href="bloglist.html">博客浏览</a>
-							</li>
-							<li>
-								<a href="userlist.html">用户列表</a>
-							</li>							
-							<li>
-								<a href="login.html">登录</a>
-							</li>
-							<li>
-								<a href="regist.html">注册</a>
-							</li>
-							<li>
-								<a href="blogcreate.html">博客创建</a>
-							</li>
-							<li>
-								<a href="personblogschemalist.html">我的博客</a>
-							</li>
-							<li>
-								<a href="index.html">退出</a>
-							</li>
-							<li>
-								<a onclick="window.history.go(-1)" style="cursor: pointer;">返回</a>
-							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									博客类型
-									<b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu">
-									<li>
-										<a href="#">原创</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">转载</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">经典</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">另一个分离的链接</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
+		<div id="title" class="d1">
+			<script type="text/javascript">
+				$(function(){
+					$("#title").load("title.html")
+				})	
+			</script>
 		</div>
 		<!--第一个banner的内容-->
 		<div class="banner1">
@@ -112,15 +56,15 @@
 		<div class="container allwidth">
 			<div class="widthtwo regist">
 				<h1>注&nbsp;册&nbsp;用&nbsp;户</h1>
-				<form id="form1" action="regist.action" method="post">
+				<form id="form1" action="register.do" method="post">
 					<table class="t1">
 						<tr>
-							<td>username:<input id="name" onblur="nameBlur()" type="text" class="form-control" name="name" placeholder="please input your name" />
+							<td>username:<input id="name"  type="text" class="form-control" name="username" placeholder="please input your name" />
 								<span id="name_exit" style="color:red;"></span>
 							</td>
 						</tr>
 						<tr>
-							<td>password:<input id="pass1" type="password" class="form-control" name="pass" /></td>
+							<td>password:<input id="pass1" type="password" class="form-control" name="password" /></td>
 						</tr>
 						<tr>
 							<td>passsure:<input id="pass2" type="password" class="form-control" name="pass2" /></td>
@@ -128,20 +72,20 @@
 						<tr>
 							<td>age:<br/><input id="age" type="text" class="form-control" name="age" style="text-align:center;display:inline;width:15%;margin-right: 8%;" />
 
-								<input type="radio" checked="checked" name="sex" value="f" />female&nbsp;&nbsp;
-								<input type="radio" name="sex" value="m" />male
+								<input type="radio" checked="checked" name="gender" value="2" />female&nbsp;&nbsp;
+								<input type="radio" name="gender" value="1" />male
 							</td>
 						</tr>
 						<tr>
 							<td>
 								address:<br/>
-			     				<select class="form-control address" id="provincedId" name="provinceId" onchange="showCity(this.value)"><option value='0'>-prov-</option></select>
-			   					<select class="form-control address" id="cityId" name="cityId" onchange="showArea(this.value)"><option value='0'>-city-</option></select>
-			   					<select class="form-control address" id="areaId" name="areaId"><option value='0'>-area-</option></select>
+			     				<select class="form-control address" id="provincedId" name="provinceId" onchange="showCity(this.value)"><option value='湖北省'>湖北省</option></select>
+			   					<select class="form-control address" id="cityId" name="cityId" onchange="showArea(this.value)"><option value='武汉市'>武汉市</option></select>
+			   					<select class="form-control address" id="areaId" name="areaId"><option value='洪山区'>洪山区</option></select>
 			     			</td>
 						</tr>
 						<tr>
-							<td>tel:<input id="tel" type="text" class="form-control" name="tel" /></td>
+							<td>tel:<input id="tel" type="number" class="form-control" name="telephone" /></td>
 						</tr>
 						<tr class="button1">
 							<td align="center">
@@ -246,3 +190,39 @@
 	</body>
 
 </html>
+<script >
+
+	function check() {
+		var name = $("#name").val();
+		var pass1 = $("#pass1").val();
+		var pass2 = $("#pass2").val();
+		var tel = $("#tel").val();
+		var provincedId = $("#provincedId").val();
+		var cityId = $("#cityId").val();
+		var areaId = $("#areaId").val();
+		if(name.trim() === "") {
+			alert("用户名不许为空");
+			return;
+		}
+		if(pass2.trim() === ""&&pass1.trim()==="") {
+			alert("密码不许为空");
+			return;
+		}
+		if(pass2.trim() !== pass1.trim()){
+			alert("两次输入密码必须相同");
+			return;
+		}
+
+		if(tel.trim() === "") {
+			alert("电话不许为空");
+			return;
+		}
+		if(provincedId === ""&&cityId === ""&&areaId === "") {
+			alert("请选择所在的城市");
+			return;
+		}
+		if(confirm("确认要注册吗")) {
+			$("#form1").submit();
+		}
+	}
+</script>

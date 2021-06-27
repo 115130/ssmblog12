@@ -1,10 +1,12 @@
 package com.blog.filter;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebFilter(urlPatterns = "/*")
 public class MyCorsFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -16,6 +18,7 @@ public class MyCorsFilter implements Filter {
         try {
             HttpServletRequest request = (HttpServletRequest) servletRequest;
             HttpServletResponse response = (HttpServletResponse) servletResponse;
+            request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
 
             if ("/hello".equals(request.getRequestURI())) {

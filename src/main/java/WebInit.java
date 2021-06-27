@@ -44,9 +44,6 @@ public class WebInit extends AbstractDispatcherServletInitializer {
         return new String[0];
     }
 
-    @Override
-    protected Filter[] getServletFilters() {
-        return new Filter[]{new CharacterEncodingFilter("UTF-8", true), new MyCorsFilter()};
-    }
+
 }
 

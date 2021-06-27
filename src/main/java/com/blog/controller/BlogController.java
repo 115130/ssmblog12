@@ -1,6 +1,7 @@
 package com.blog.controller;
 
 import com.blog.bean.Blog;
+import com.blog.service.AccountService;
 import com.blog.service.BlogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +11,12 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-public class IndexController {
+public class BlogController {
     @Resource
     BlogService blogService;
 
     @RequestMapping("/index.do")
-    public String index(Model model){
+    public String index(Model model){//加载主页页面
         List<Blog> blogsTop5 = blogService.queryTop5Blog();
         List<Blog> blogsTop10 = blogService.queryTop10Blog();
         model.addAttribute("popularBlogs",blogsTop5);
@@ -23,12 +24,23 @@ public class IndexController {
         return "index.html";
     }
 
-    @RequestMapping("/title.do")
+
+    @RequestMapping("/title.do")//指定id的用户
     public String title(Model model){
         Long id = (Long) model.getAttribute("title");
         blogService.updateBlogPageView(id);
         Blog blog = blogService.queryBlogById(id);
         model.addAttribute("blog",blog);
+        return "bloginfo.html";
+    }
+
+    @RequestMapping("/blog.do")//加载所有用户
+    public String blog(Model model){
+
+        List<Blog> blogs = blogService.queryAllBlog();
+        model.addAttribute("blogs",blogs);
         return "bloglist.html";
     }
+
+
 }

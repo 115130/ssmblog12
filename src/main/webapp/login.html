@@ -13,70 +13,15 @@
 	</head>
 
 	<body>
-		<!--导航栏盒子-->
-		<div class="d1">
-			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-				<div class="container-fluid allwidth">
-					<div class="navbar-header">
-						<a class="navbar-brand" href="#">欢迎来到博客园</a>
-					</div>
-					<div>
-						<ul class="nav navbar-nav">
-							<li class="active">
-								<a href="index.html">网站首页</a>
-							</li>
-							<li>
-								<a href="bloglist.html">博客浏览</a>
-							</li>
-							<li>
-								<a href="userlist.html">用户列表</a>
-							</li>							
-							<li>
-								<a href="login.html">登录</a>
-							</li>
-							<li>
-								<a href="regist.html">注册</a>
-							</li>
-							<li>
-								<a href="blogcreate.html">博客创建</a>
-							</li>
-							<li>
-								<a href="personblogschemalist.html">我的博客</a>
-							</li>
-							<li>
-								<a href="index.html">退出</a>
-							</li>
-							<li>
-								<a onclick="window.history.go(-1)" style="cursor: pointer;">返回</a>
-							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									博客类型
-									<b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu">
-									<li>
-										<a href="#">原创</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">转载</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">经典</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">另一个分离的链接</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
+		
+		<div id="title" class="d1">
+			<script type="text/javascript">
+				$(function(){
+					$("#title").load("title.html")
+				})	
+			</script>
 		</div>
+		
 		<!--第一个banner的内容-->
 		<div class="banner1">
 			<div class="container">
@@ -111,17 +56,17 @@
 		<!--中间内容部分开始-->
 		<div class="container widthone">
 			<h1>登&nbsp;&nbsp;录</h1>
-			<form class="form-horizontal" role="form">
+			<form class="form-horizontal" role="form" method="post" action="login.do">
 				<div class="form-group">
 					<label for="firstname" class="col-sm-2 control-label">名字</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="firstname" placeholder="请输入名字">
+						<input type="text" class="form-control" id="firstname" name="username" placeholder="请输入名字">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">密码</label>
+					<label for="password" class="col-sm-2 control-label">密码</label>
 					<div class="col-sm-10">
-						<input type="password" class="form-control" id="password" placeholder="请输入密码">
+						<label for="password"></label><input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
 					</div>
 				</div>
 				<div class="form-group">
@@ -130,13 +75,14 @@
 							<label><input type="checkbox">请记住我</label>
 						</div>
 					</div>
-				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 						<button type="submit" class="btn btn-success">登录</button>
-						<button type="submit" class="btn btn-default">退出</button>
+						<button type="reset" class="btn btn-default">退出</button>
 					</div>
 				</div>
+				</div>
+
 			</form>
 		</div>
 		<!--内容部分结束-->
@@ -232,3 +178,4 @@
 	</body>
 
 </html>
+

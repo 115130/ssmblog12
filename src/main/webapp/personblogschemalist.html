@@ -14,69 +14,15 @@
 
 	<body>
 		<!--导航栏盒子-->
-		<div class="d1">
-			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-				<div class="container-fluid allwidth">
-					<div class="navbar-header">
-						<a class="navbar-brand" href="#">欢迎来到博客园</a>
-					</div>
-					<div>
-						<ul class="nav navbar-nav">
-							<li class="active">
-								<a href="index.html">网站首页</a>
-							</li>
-							<li>
-								<a href="bloglist.html">博客浏览</a>
-							</li>
-							<li>
-								<a href="userlist.html">用户列表</a>
-							</li>							
-							<li>
-								<a href="login.html">登录</a>
-							</li>
-							<li>
-								<a href="regist.html">注册</a>
-							</li>
-							<li>
-								<a href="blogcreate.html">博客创建</a>
-							</li>
-							<li>
-								<a href="personblogschemalist.html">我的博客</a>
-							</li>
-							<li>
-								<a href="index.html">退出</a>
-							</li>
-							<li>
-								<a onclick="window.history.go(-1)" style="cursor: pointer;">返回</a>
-							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									博客类型
-									<b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu">
-									<li>
-										<a href="#">原创</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">转载</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">经典</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">另一个分离的链接</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
+		<script type="text/javascript">
+			$(function(){
+				$("#title").load("title.html")
+			})	
+		</script>
+		<div id="title" class="d1">
+			
 		</div>
+		
 		<!--第一个banner的内容-->
 		<div class="banner1">
 			<div class="container">
@@ -112,21 +58,20 @@
 			<!--用户信息-->
 			<div id="userinfo" class="templatemo-container userinfo">
 				<ul>
-					<li><span class="glyphicon glyphicon-user">：莱奥纳多</span></li>
+					<li><span class="glyphicon glyphicon-user" th:text="${myAccount.username}">：莱奥纳多</span></li>
 					<li><span class="glyphicon glyphicon-tree-conifer">：</span>
-						<c:if test="${user.sex=='f'}">♂</c:if>&nbsp;
-						<c:if test="${user.sex!='f'}">♀</c:if>
+						<span th:text="${myAccount.gender==1?'♂':'♀'}"></span>&nbsp;
 					</li>
-					<li><span class="glyphicon glyphicon-circle-arrow-right">：</span>22</li>
-					<li><span class="glyphicon glyphicon-earphone">：128304893</span></li>
-					<c:if test="${current_user != null }">
+					<li><span class="glyphicon glyphicon-circle-arrow-right" th:text="${myAccount.age}">：</span>22</li>
+					<li><span class="glyphicon glyphicon-earphone" th:text="${myAccount.telephone}">：128304893</span></li>
+					<div th:if="${myAccount!=null}">
 						<li>
 							<a href="showbloglist.action?type=1&uid=${current_user.id }">click me into my blog</a>
 						</li>
 						<li>
 							<a href="createblog.action?type=1">create blog</a>
 						</li>
-					</c:if>
+					</div>
 				</ul>
 			</div>
 			<!--用户博客概要列表-->
@@ -138,15 +83,29 @@
 						<th>时间</th>
 					</tr>
 					<!--要循环的博客概要-->
-					<tr class="personbloginfo_tr">
+
+						<td>
+							<!--/*@thymesVar id="author" type="com.blog.bean.Blog.author"*/-->
+						</td>
+						<td>
+							<a th:text="${p.title}" th:href="${#servletContext.contextPath}+'title.do?title='+${p.id}" >这是一个什么都没有的东西</a>
+						</td>
+						<td>
+							<a th:text="${p.kind}" th:href="${#servletContext.contextPath}+'kind.do?kind='+${p.kind}" >这是一个什么都没有的东西</a>
+						</td>
+						<td th:text="${p.creationTime}" >这是一个什么都没有的东西</td>
+						<td th:text="${p.pageView}">这是一个什么都没有的东西</td>
+					</tr>
+
+					<tr th:each="p:${blogs}">
 						<td class="line">
-							<a href="showbloglist.action?type=1&uid=${blog.uid }">莱奥纳多</a>
+							<a th:text="${p.author.username}" th:href="${#servletContext.contextPath}+'author.do?id='+${p.author.id}">这是一个什么都没有的东西</a>
 						</td>
 						<td class="line">
-							<span class="schema_title">羚羊及时转弯的机巧和敏捷</span>
+							<span class="schema_title" th:text="${p.title}">羚羊及时转弯的机巧和敏捷</span>
 						</td>
 						<td class="line">
-							<span class="schema_time">时间：<fmt:formatDate pattern="yyyy/MM/dd" value="2019-05-15"/>2019-05-15</span>
+							<span class="schema_time">时间：<span th:text="${p.creationTime}">2019-05-15</span>
 							<span class="blogedit">
 	                    		<a onclick="delete_blog(${blog.id })">删除</a>&nbsp;|&nbsp;
 	                    		<a href="editblog.action?type=2&id=${blog.id }">编辑</a>
@@ -155,84 +114,13 @@
 					</tr>
 					<tr class="personbloginfo_tr">
 						<td class="layout" colspan="3">
-							<a href="showbloginfo.action?id=${blog.id }">
+							<a th:text="${p.shema-}" th:href="${#servletContext.contextPath}+'title.do?title='+${p.id}">
 								羚羊最快的奔跑时速只有70公里，而猎豹的奔跑时速可以达到100公里。按常理，猎豹捕获羚羊那是十拿九稳的事，但事实并非如此，猎豹每次出击，它的成功概率不到10%。那么，羚羊又是怎样从猎豹的魔爪下而一次次成功逃脱的呢？羚羊最快的奔跑时速只有70公里，而猎豹的奔跑时速可以达到100公里。按常理，猎豹捕获羚羊那是十拿九稳的事，但事实并非如此
 							</a>
 						</td>
 					</tr>
 					
-					<!--要循环的博客概要-->
-					<tr class="personbloginfo_tr">
-						<td class="line">
-							<a href="showbloglist.action?type=1&uid=${blog.uid }">莱奥纳多</a>
-						</td>
-						<td class="line">
-							<span class="schema_title">羚羊及时转弯的机巧和敏捷</span>
-						</td>
-						<td class="line">
-							<span class="schema_time">时间：<fmt:formatDate pattern="yyyy/MM/dd" value="2019-05-15"/>2019-05-15</span>
-							<span class="blogedit">
-	                    		<a onclick="delete_blog(${blog.id })">删除</a>&nbsp;|&nbsp;
-	                    		<a href="editblog.action?type=2&id=${blog.id }">编辑</a>
-		                    	</span>
-						</td>
-					</tr>
-					<tr class="personbloginfo_tr">
-						<td class="layout" colspan="3">
-							<a href="showbloginfo.action?id=${blog.id }">
-								羚羊最快的奔跑时速只有70公里，而猎豹的奔跑时速可以达到100公里。按常理，猎豹捕获羚羊那是十拿九稳的事，但事实并非如此，猎豹每次出击，它的成功概率不到10%。那么，羚羊又是怎样从猎豹的魔爪下而一次次成功逃脱的呢？羚羊最快的奔跑时速只有70公里，而猎豹的奔跑时速可以达到100公里。按常理，猎豹捕获羚羊那是十拿九稳的事，但事实并非如此
-							</a>
-						</td>
-					</tr>
-					
-					<!--要循环的博客概要-->
-					<tr class="personbloginfo_tr">
-						<td class="line">
-							<a href="showbloglist.action?type=1&uid=${blog.uid }">莱奥纳多</a>
-						</td>
-						<td class="line">
-							<span class="schema_title">羚羊及时转弯的机巧和敏捷</span>
-						</td>
-						<td class="line">
-							<span class="schema_time">时间：<fmt:formatDate pattern="yyyy/MM/dd" value="2019-05-15"/>2019-05-15</span>
-							<span class="blogedit">
-	                    		<a onclick="delete_blog(${blog.id })">删除</a>&nbsp;|&nbsp;
-	                    		<a href="editblog.action?type=2&id=${blog.id }">编辑</a>
-		                    	</span>
-						</td>
-					</tr>
-					<tr class="personbloginfo_tr">
-						<td class="layout" colspan="3">
-							<a href="showbloginfo.action?id=${blog.id }">
-								羚羊最快的奔跑时速只有70公里，而猎豹的奔跑时速可以达到100公里。按常理，猎豹捕获羚羊那是十拿九稳的事，但事实并非如此，猎豹每次出击，它的成功概率不到10%。那么，羚羊又是怎样从猎豹的魔爪下而一次次成功逃脱的呢？羚羊最快的奔跑时速只有70公里，而猎豹的奔跑时速可以达到100公里。按常理，猎豹捕获羚羊那是十拿九稳的事，但事实并非如此
-							</a>
-						</td>
-					</tr>
-					
-					<!--要循环的博客概要-->
-					<tr class="personbloginfo_tr">
-						<td class="line">
-							<a href="showbloglist.action?type=1&uid=${blog.uid }">莱奥纳多</a>
-						</td>
-						<td class="line">
-							<span class="schema_title">羚羊及时转弯的机巧和敏捷</span>
-						</td>
-						<td class="line">
-							<span class="schema_time">时间：<fmt:formatDate pattern="yyyy/MM/dd" value="2019-05-15"/>2019-05-15</span>
-							<span class="blogedit">
-	                    		<a onclick="delete_blog(${blog.id })">删除</a>&nbsp;|&nbsp;
-	                    		<a href="editblog.action?type=2&id=${blog.id }">编辑</a>
-		                    	</span>
-						</td>
-					</tr>
-					<tr class="personbloginfo_tr">
-						<td class="layout" colspan="3">
-							<a href="showbloginfo.action?id=${blog.id }">
-								羚羊最快的奔跑时速只有70公里，而猎豹的奔跑时速可以达到100公里。按常理，猎豹捕获羚羊那是十拿九稳的事，但事实并非如此，猎豹每次出击，它的成功概率不到10%。那么，羚羊又是怎样从猎豹的魔爪下而一次次成功逃脱的呢？羚羊最快的奔跑时速只有70公里，而猎豹的奔跑时速可以达到100公里。按常理，猎豹捕获羚羊那是十拿九稳的事，但事实并非如此
-							</a>
-						</td>
-					</tr>
-					
+
 				</table>
 			</div>
 		</div>

@@ -14,68 +14,12 @@
 
 	<body>
 		<!--导航栏盒子-->
-		<div class="d1">
-			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-				<div class="container-fluid allwidth">
-					<div class="navbar-header">
-						<a class="navbar-brand" href="#">欢迎来到博客园</a>
-					</div>
-					<div>
-						<ul class="nav navbar-nav">
-							<li class="active">
-								<a href="index.html">网站首页</a>
-							</li>
-							<li>
-								<a href="bloglist.html">博客浏览</a>
-							</li>
-							<li>
-								<a href="userlist.html">用户列表</a>
-							</li>
-							<li>
-								<a href="login.html">登录</a>
-							</li>
-							<li>
-								<a href="regist.html">注册</a>
-							</li>
-							<li>
-								<a href="blogcreate.html">博客创建</a>
-							</li>
-							<li>
-								<a href="personblogschemalist.html">我的博客</a>
-							</li>
-							<li>
-								<a href="index.html">退出</a>
-							</li>
-							<li>
-								<a onclick="window.history.go(-1)" style="cursor: pointer;">返回</a>
-							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									博客类型
-									<b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu">
-									<li>
-										<a href="#">原创</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">转载</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">经典</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">另一个分离的链接</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
+		<div id="title" class="d1">
+			<script type="text/javascript">
+				$(function(){
+					$("#title").load("title.html")
+				})	
+			</script>
 		</div>
 		<!--第一个banner的内容-->
 		<div class="banner1">
@@ -116,7 +60,7 @@
 					<th>作者</th>
 					<th>标题</th>
 					<th>类型</th>
-					<th>发表时间</th>吧
+					<th>发表时间</th>
 					<th>浏览量</th>
 				</tr>
 				<!--/*@thymesVar id="popularBlogs" type="com.blog.bean.Blog"*/-->
