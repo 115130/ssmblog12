@@ -31,4 +31,13 @@ public class MyBlogController {
         }
         return "login.html";
     }
+
+    @RequestMapping("/author.do")
+    public String author (Model model,Long id){
+        List<Blog> blogs = blogService.queryBlogByAccountId(id);
+        Account account = accountService.queryOneAccountById(id);
+        model.addAttribute("myBlog",blogs);
+        model.addAttribute("myAccount",account);
+        return "personblogschemalist.html";
+    }
 }

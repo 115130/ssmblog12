@@ -29,12 +29,26 @@ public class BlogController {
         return "index.html";
     }
 
+    @RequestMapping("/kind.do")//加载指定类型博客
+    public String kind(String kind,Model model){
+        List<Blog> blogs = blogService.queryBlogByKind(kind);
+        model.addAttribute("kind1",kind);
+        model.addAttribute("blogs",blogs);
+        return "blogkind.html";
+    }
 
-    @RequestMapping("/title.do")//指定id的用户
-    public String title(String title,Model model){
-        Long id = (Long) model.getAttribute("title");
-        blogService.updateBlogPageView(id);
-        Blog blog = blogService.queryBlogById(id);
+    @RequestMapping("/deleteBlog.do")//删除指定博客
+    public String deleteBlog(Long id){
+        blogService.deleteBolg(id);
+        return "redirect:blog.do";
+    }
+
+
+
+    @RequestMapping("/title.do")//加载指定的blog
+    public String title(Long title,Model model){
+        blogService.updateBlogPageView(title);
+        Blog blog = blogService.queryBlogById(title);
         model.addAttribute("blog",blog);
         return "bloginfo.html";
     }
@@ -47,7 +61,7 @@ public class BlogController {
         return "bloglist.html";
     }
 
-    @RequestMapping("/createBlog.do")
+    @RequestMapping("/createBlog.do")//接受创建博客参数，并存入数据库
     public String creatBlog(String title,String kind,String schema,String  content, HttpSession session){
         List<Blog> blogs = blogService.queryAllBlog();
         Account account = (Account) session.getAttribute("account");
@@ -59,9 +73,8 @@ public class BlogController {
         }
     }
 
-    @RequestMapping("/viewCreateBlog.do")//加载所有用户
+    @RequestMapping("/viewCreateBlog.do")//加载博客添加页面
     public String viewCreatBlog(Model model, HttpSession session){
-        List<Blog> blogs = blogService.queryAllBlog();
         Account account = (Account) session.getAttribute("account");
         if (account!=null){
             model.addAttribute("kinds",kindMapper.selectKind());

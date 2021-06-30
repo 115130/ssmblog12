@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title></title>
+		<!-- 引入 Bootstrap -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+		<script src="js/jquery.js"></script>
+		<!-- 包括所有已编译的插件 -->
+		<script src="js/bootstrap.min.js"></script>
+		<link href="css/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!--导航栏盒子-->
+		<div id="title" class="d1">
+			<script type="text/javascript">
+				$(function(){
+					$("#title").load("title.html")
+				})	
+			</script>
+		</div>
+		<!--第一个banner的内容-->
+		<div class="banner1">
+			<div class="container">
+				<h1>博客园</h1>
+				<h2>博客园软件工程师的宝典，让web开发更迅速、简单。</h2>
+				<p class="masthead-button-links">
+					<a class="btn btn-lg btn-primary btn-shadow" href="https://v3.bootcss.com/css/" target="_blank" role="button" onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-Bootstrap3中文文档'])">Bootstrap3中文文档(v3.3.7)</a>
+				</p>
+				<ul class="masthead-links">
+					<li>
+						<a href="https://v3.bootcss.com/css/" target="_blank" role="button" onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-Bootstrap2中文文档'])">Bootstrap2中文文档(v2.3.2)</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--热门社区-->
+		<div class="bc-social">
+			<div class="container">
+				<ul class="bc-social-buttons">
+					<li class="social-forum">
+						<a class="" href="http://wenda.bootcss.com" title="Bootstrap问答社区" target="_blank" onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-Bootstrap问答社区'])">
+							<i class="fa fa-comments"></i> Bootstrap问答社区
+						</a>
+					</li>
+					<li class="social-weibo">
+						<a href="http://weibo.com/bootcss" title="Bootstrap中文网官方微博" target="_blank" onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-新浪微博'])"><i class="fa fa-weibo"></i> 新浪微博：@Bootstrap中文网</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- 内容模块1 -->
+		<div class="d2 allwidth">
+			<h1 th:text="${kind1}"></h1>
+			<table class="table table-hover">
+				<tr>
+					<th>作者</th>
+					<th>标题</th>
+					<th>类型</th>
+					<th>发表时间</th>
+					<th>浏览量</th>
+				</tr>
+				<!--/*@thymesVar id="popularBlogs" type="com.blog.bean.Blog"*/-->
+				<tr th:each="p:${blogs}">
+					<td>
+						<!--/*@thymesVar id="author" type="com.blog.bean.Blog.author"*/-->
+						<a th:text="${p.author.username}" th:href="${#servletContext.contextPath}+'author.do?id='+${p.author.id}">这是一个什么都没有的东西</a>
+					</td>
+					<td>
+						<a th:text="${p.title}" th:href="${#servletContext.contextPath}+'title.do?title='+${p.id}" >这是一个什么都没有的东西</a>
+					</td>
+					<td>
+						<a th:text="${p.kind}" th:href="${#servletContext.contextPath}+'kind.do?kind='+${p.kind}" >这是一个什么都没有的东西</a>
+					</td>
+					<td th:text="${p.creationTime}" >这是一个什么都没有的东西</td>
+					<td th:text="${p.pageView}">这是一个什么都没有的东西</td>
+				</tr>
+
+
+			</table>
+		</div>
+		<!-- 脚部 -->
+		<div id="foot" class="footer">
+			<script type="text/javascript">
+				$(function(){
+					$("#foot").load("foot.html")
+				})
+			</script>
+		</div>
+		<!-- 脚部结束 -->
+	</body>
+
+</html>

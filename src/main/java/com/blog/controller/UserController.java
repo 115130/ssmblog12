@@ -30,8 +30,10 @@ public class UserController {
         return "true";
     }
 
+    
+
     @RequestMapping("/loadUser.do")
-    public String loadUser(Model model){
+    public String  loadUser(Model model){
         List<Account> accounts = accountService.queryAllAccount();
         model.addAttribute("accounts",accounts);
         return "userlist.html";
@@ -45,6 +47,18 @@ public class UserController {
         }else {
             return "regist.html";
         }
+    }
+
+    @RequestMapping("/deleteaccount.do")//删除指定用户
+    public String deleteBlog(Long id,Model model){
+        accountService.deleteAccount(id);
+        return "redirect:loadUser.do";
+    }
+
+    @RequestMapping("/quite.do")//加载指定类型博客
+    public String quite(HttpSession session){
+        session.removeAttribute("account");
+        return "index.html";
     }
 
     @RequestMapping("/login.do")
