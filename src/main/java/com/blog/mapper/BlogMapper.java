@@ -2,6 +2,7 @@ package com.blog.mapper;
 
 import com.blog.bean.Account;
 import com.blog.bean.Blog;
+import com.blog.bean.Kind;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
 
@@ -9,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface BlogMapper {
+
+
     @Select("select * from blog")
     @Results({
             @Result(column = "author" ,property = "author",one=@One(select = "com.blog.mapper.AccountMapper.selectById",fetchType = FetchType.EAGER))

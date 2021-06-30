@@ -2,7 +2,9 @@ package com.blog.service;
 
 import com.blog.bean.Account;
 import com.blog.bean.Blog;
+import com.blog.bean.Kind;
 import com.blog.mapper.BlogMapper;
+import com.blog.mapper.KindMapper;
 import com.blog.util.StringUtil;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
@@ -18,12 +20,23 @@ public class BlogService {
     @Resource
     private BlogMapper mapper;
 
+    @Resource
+    private KindMapper kindMapper;
+
     /**
      * 查询所有blog
      * @return 返回全部blog
      */
     public List<Blog> queryAllBlog(){
         return mapper.selectAllBlog();
+    }
+
+    /**
+     * 查询所有分类
+     * @return 返回全部分类
+     */
+    public List<Kind> queryAllKind(){
+        return kindMapper.selectKind();
     }
 
     /**
@@ -86,10 +99,10 @@ public class BlogService {
      * @param content 内容
      * @return 是否添加成功
      */
-    public boolean insertBlog(Long id,String title,String kind,String schema,String content){
+    public boolean insertBlog(Long id, String title, String kind, String schema, String content){
         Account account = new Account();
         account.setId(id);
-        return mapper.insertBlog(new Blog(title,kind,schema,content,account,new Timestamp(System.currentTimeMillis()),0l))>0;
+        return mapper.insertBlog(new Blog(title,kind,schema,content,account,new Timestamp(System.currentTimeMillis()), 0L))>0;
     }
 
     /**

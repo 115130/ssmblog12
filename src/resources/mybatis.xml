@@ -16,6 +16,7 @@
     <mappers>
         <mapper class="com.blog.mapper.AccountMapper"/>
         <mapper class="com.blog.mapper.BlogMapper"/>
+        <mapper class="com.blog.mapper.KindMapper"/>
 <!--        <package name="com.test.dao"/>-->
     </mappers>
 </configuration>

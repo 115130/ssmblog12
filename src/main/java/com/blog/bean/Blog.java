@@ -15,6 +15,16 @@ public class Blog implements Serializable {
     private String content;
 
 
+    public Blog(String title, String kind, String schema, String content, Account account, Timestamp timestamp, long l) {
+        this.title = title;
+        this.kind = kind;
+        this.schema = schema;
+        this.author = account;
+        this.creationTime = timestamp;
+        this.pageView = l;
+        this.content = content;
+    }
+
 
     public Long getId() {
         return id;
@@ -32,13 +42,7 @@ public class Blog implements Serializable {
         this.title = title;
     }
 
-    public String getKind() {
-        return kind;
-    }
 
-    public void setKind(String kind) {
-        this.kind = kind;
-    }
 
     public String getSchema() {
         return schema;
@@ -106,6 +110,14 @@ public class Blog implements Serializable {
     public Blog() {
     }
 
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
     public Blog(Long id, String title, String kind, String schema, Long pageView, Account author, Timestamp creationTime, Timestamp modification, String content) {
         this.id = id;
         this.title = title;
@@ -117,22 +129,4 @@ public class Blog implements Serializable {
         this.modification = modification;
         this.content = content;
     }
-    public Blog( String title, String kind, String schema, String content,  Account author, Timestamp creationTime,Long pageView) {
-        this.title = title;
-        this.kind = kind;
-        this.schema = schema;
-        this.author = author;
-        this.creationTime = creationTime;
-        this.content = content;
-        this.pageView=pageView;
-    }
-    public Blog(Long id, String kind, String schema, String content, Timestamp modification) {
-        this.id=id;
-        this.kind = kind;
-        this.schema = schema;
-        this.content = content;
-        this.modification=modification;
-    }
-
-
 }

@@ -3,6 +3,7 @@ package com.blog.config;
 
 import com.blog.mapper.AccountMapper;
 import com.blog.mapper.BlogMapper;
+import com.blog.mapper.KindMapper;
 import com.blog.util.CommonMapperUtil;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -60,5 +61,9 @@ public class SpringConfig {
     @Bean(name = "blogMapper")
     public BlogMapper newBlogMapperFactoryBean(@Value("#{sqlSessionFactory}") SqlSessionFactory sqlSessionFactory) {
         return new CommonMapperUtil<BlogMapper>().getObjectDao(BlogMapper.class,sqlSessionFactory);
+    }
+    @Bean(name = "kindMapper")
+    public KindMapper newKindMapperFactoryBean(@Value("#{sqlSessionFactory}") SqlSessionFactory sqlSessionFactory) {
+        return new CommonMapperUtil<KindMapper>().getObjectDao(KindMapper.class,sqlSessionFactory);
     }
 }

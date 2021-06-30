@@ -36,9 +36,9 @@ public class BlogServiceTest extends TestCase {
         System.out.println(blogService.queryBlogByKind("das"));
     }
 
-    public void testInsertBlog() {
-        System.out.println(blogService.insertBlog(2L,"这是标题1","这是分类1","这是简介1","这是内容1" ));
-    }
+//    public void testInsertBlog() {
+//        System.out.println(blogService.insertBlog(2L,"这是标题1","这是分类1","这是简介1","这是内容1" ));
+//    }
 
     public void testDeleteBolg() {
         System.out.println(blogService.deleteBolg(7L));

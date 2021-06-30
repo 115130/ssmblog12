@@ -5,7 +5,6 @@ import com.blog.bean.Blog;
 import com.blog.service.AccountService;
 import com.blog.service.BlogService;
 import com.blog.util.StringUtil;
-import com.sun.media.jfxmedia.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,7 +57,7 @@ public class UserController {
             }
             for (Account account : accounts) {
                 if ( password.equals(account.getPassword())){
-                    byte[] bytes = account.getPassword().toString().getBytes(StandardCharsets.UTF_8);
+                    byte[] bytes = account.getPassword().getBytes(StandardCharsets.UTF_8);
                     String passwordSHA = StringUtil.toSHA1(bytes);
                     account.setPassword(passwordSHA);
                     session.setAttribute("account",account);//密码sha加密
