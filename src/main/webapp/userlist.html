@@ -81,7 +81,7 @@
 					<td th:text="${account.telephone}">15899997777</td>
 					<td th:text="${account.address}">陕西省-西安市-雁塔区</td>
 					<td th:text="${account.creationTime}">2019-05-15</td>
-					<td><a href="#">删除</a>&nbsp;&nbsp;<a href="#">编辑</a></td>
+					<td><a th:href="${'deleteaccount.do?+id='+account.id}">删除</a>&nbsp;&nbsp;<a href="#">编辑</a></td>
 				</tr>
 
 			</table>

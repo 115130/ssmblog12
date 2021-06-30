@@ -40,4 +40,5 @@ public class MyBlogController {
         model.addAttribute("myAccount",account);
         return "personblogschemalist.html";
     }
+
 }

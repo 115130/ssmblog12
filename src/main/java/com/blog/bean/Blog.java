@@ -15,6 +15,22 @@ public class Blog implements Serializable {
     private String content;
 
 
+
+    private String comment;
+
+    public Blog(Long id, String title, String kind, String schema, Long pageView, Account author, Timestamp creationTime, Timestamp modification, String content, String comment) {
+        this.id = id;
+        this.title = title;
+        this.kind = kind;
+        this.schema = schema;
+        this.pageView = pageView;
+        this.author = author;
+        this.creationTime = creationTime;
+        this.modification = modification;
+        this.content = content;
+        this.comment = comment;
+    }
+
     public Blog(String title, String kind, String schema, String content, Account account, Timestamp timestamp, long l) {
         this.title = title;
         this.kind = kind;
@@ -42,7 +58,13 @@ public class Blog implements Serializable {
         this.title = title;
     }
 
+    public String getComment() {
+        return comment;
+    }
 
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
     public String getSchema() {
         return schema;

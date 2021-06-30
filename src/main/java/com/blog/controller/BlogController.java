@@ -6,8 +6,10 @@ import com.blog.mapper.KindMapper;
 import com.blog.service.AccountService;
 import com.blog.service.BlogService;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -43,6 +45,17 @@ public class BlogController {
         return "redirect:blog.do";
     }
 
+    @RequestMapping("/viewmodifyblog.do")//显示修改博客页面
+    public String viewModifyBlog(Long id,Model model){
+        model.addAttribute("id",id);
+        return "modifyblog.html";
+    }
+
+    @RequestMapping("/modifyblog.do")//修改博客页面
+    public String modifyBlog(Blog blog){
+        blogService.updateBlog(blog.getId(),blog.getKind(), blog.getSchema(),blog.getContent());
+        return "redirect:blog.do";
+    }
 
 
     @RequestMapping("/title.do")//加载指定的blog

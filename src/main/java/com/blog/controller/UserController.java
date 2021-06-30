@@ -58,7 +58,19 @@ public class UserController {
     @RequestMapping("/quite.do")//加载指定类型博客
     public String quite(HttpSession session){
         session.removeAttribute("account");
-        return "index.html";
+        return "redirect:index.do";
+    }
+
+    @RequestMapping("/modifyaccount.do")//修改用户页面
+    public String modifyAccount(Account account){
+        accountService.updateAccount(account.getId(),account.getPassword(),account.getTelephone(),account.getAge(),account.getGender(),account.getAddress());
+        return "redirect:loadUser.do";
+    }
+
+    @RequestMapping("/viewmodifyaccount.do")//显示修改用户页面
+    public String viewModifyAccount(Long id,Model model){
+        model.addAttribute("id",id);
+        return "redirect:modifyaccount.html";
     }
 
     @RequestMapping("/login.do")
