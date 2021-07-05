@@ -58,15 +58,7 @@
 				<h1>修 改&nbsp;用&nbsp;户</h1>
 				<form id="form1" action="modifyaccount.do" method="post">
 					<table class="t1">
-
-						<tr>
-							<td>telephone:<input  type="text" class="form-control" name="telephone" /></td>
-						</tr>
-
-						<tr>
-							<td>address:<input  type="text" class="form-control" name="address" /></td>
-						</tr>
-
+						<input name="id" type="hidden" th:value="${id}"/>
 						<tr>
 							<td>password:<input id="pass1" type="password" class="form-control" name="password" /></td>
 						</tr>
@@ -112,35 +104,8 @@
 <script >
 
 	function check() {
-		var name = $("#name").val();
-		var pass1 = $("#pass1").val();
-		var pass2 = $("#pass2").val();
-		var tel = $("#tel").val();
-		var provincedId = $("#provincedId").val();
-		var cityId = $("#cityId").val();
-		var areaId = $("#areaId").val();
-		if(name.trim() === "") {
-			alert("用户名不许为空");
-			return;
-		}
-		if(pass2.trim() === ""&&pass1.trim()==="") {
-			alert("密码不许为空");
-			return;
-		}
-		if(pass2.trim() !== pass1.trim()){
-			alert("两次输入密码必须相同");
-			return;
-		}
 
-		if(tel.trim() === "") {
-			alert("电话不许为空");
-			return;
-		}
-		if(provincedId === ""&&cityId === ""&&areaId === "") {
-			alert("请选择所在的城市");
-			return;
-		}
-		if(confirm("确认要注册吗")) {
+		if(confirm("确认要修改吗")) {
 			$("#form1").submit();
 		}
 	}
