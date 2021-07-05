@@ -42,23 +42,29 @@ public class BlogController {
     @RequestMapping("/deleteBlog.do")//删除指定博客
     public String deleteBlog(Long id){
         blogService.deleteBolg(id);
-        return "redirect:blog.do";
+        return "redirect:myBlog.do";
     }
 
     @RequestMapping("/viewmodifyblog.do")//显示修改博客页面
-    public String viewModifyBlog(Long id,Model model){
-        model.addAttribute("id",id);
-        return "modifyblog.html";
+    public String viewModifyBlog(Long id,Model model,HttpSession session){
+        Account account = (Account) session.getAttribute("account");
+        if (account!=null) {
+            model.addAttribute("kinds", kindMapper.selectKind());
+            model.addAttribute("id",id);
+            return "blogmodify.html";
+
+        }
+        return "redirect:index.do";
     }
 
     @RequestMapping("/modifyblog.do")//修改博客页面
-    public String modifyBlog(Blog blog){
-        blogService.updateBlog(blog.getId(),blog.getKind(), blog.getSchema(),blog.getContent());
-        return "redirect:blog.do";
+    public String modifyBlog(Long id,String kind,String schema,String content){
+        blogService.updateBlog(id,kind,schema,content);
+        return "redirect:myBlog.do";
     }
 
 
-    @RequestMapping("/title.do")//加载指定的blog
+    @RequestMapping("/title.do")//按照标题加载blog
     public String title(Long title,Model model){
         blogService.updateBlogPageView(title);
         Blog blog = blogService.queryBlogById(title);
@@ -76,7 +82,6 @@ public class BlogController {
 
     @RequestMapping("/createBlog.do")//接受创建博客参数，并存入数据库
     public String creatBlog(String title,String kind,String schema,String  content, HttpSession session){
-        List<Blog> blogs = blogService.queryAllBlog();
         Account account = (Account) session.getAttribute("account");
         if (account!=null){
             blogService.insertBlog(account.getId(),title,kind,schema,content);

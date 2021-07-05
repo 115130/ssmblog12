@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @RequestMapping("/deleteaccount.do")//删除指定用户
-    public String deleteBlog(Long id,Model model){
+    public String deleteBlog(Long id){
         accountService.deleteAccount(id);
         return "redirect:loadUser.do";
     }
@@ -62,15 +62,15 @@ public class UserController {
     }
 
     @RequestMapping("/modifyaccount.do")//修改用户页面
-    public String modifyAccount(Account account){
-        accountService.updateAccount(account.getId(),account.getPassword(),account.getTelephone(),account.getAge(),account.getGender(),account.getAddress());
+    public String modifyAccount(Long id,String password,String telephone,int age,int gender,String address){
+        accountService.updateAccount(id,password,telephone,age,gender,address);
         return "redirect:loadUser.do";
     }
 
     @RequestMapping("/viewmodifyaccount.do")//显示修改用户页面
     public String viewModifyAccount(Long id,Model model){
         model.addAttribute("id",id);
-        return "redirect:modifyaccount.html";
+        return "modifyaccount.html";
     }
 
     @RequestMapping("/login.do")

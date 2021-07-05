@@ -41,4 +41,5 @@ public class MyBlogController {
         return "personblogschemalist.html";
     }
 
+
 }

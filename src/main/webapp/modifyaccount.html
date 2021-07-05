@@ -51,42 +51,52 @@
 				</ul>
 			</div>
 		</div>
-		<!-- 内容模块1 -->
-		<div class="d2 allwidth">
-			<h1>用户列表</h1>
-			<table class="table table-hover">
-				<caption>基本的表格布局</caption>
-				<tr>
-					<th>编号</th>
-					<th>姓名</th>
-					<th>性别</th>
-					<th>年龄</th>
-					<th>电话号码</th>
-					<th>地址</th>
-					<th>注册时间</th>					
-					<th>操作</th>
-				</tr>
 
-				<tr th:each="account:${accounts}">
-					<td>
-						<a th:text="${account.id}" href="#">001</a>
-					</td>
-					<td>
-						<a th:text="${account.username}" href="#">作者：富兰克林</a>
-					</td>
-					<td>
-						<a th:text="${account.gender==1?'男':'女'}" href="#">男</a>
-					</td>
-					<td th:text="${account.age}">22</td>
-					<td th:text="${account.telephone}">15899997777</td>
-					<td th:text="${account.address}">陕西省-西安市-雁塔区</td>
-					<td th:text="${account.creationTime}">2019-05-15</td>
-					<td><a th:href="${'deleteaccount.do?id='+account.id}">删除</a>&nbsp;&nbsp;<a th:href="${'viewmodifyaccount.do?id='+account.id}">编辑</a></td>
-				</tr>
+		<!--中间内容部分开始-->
+		<div class="container allwidth">
+			<div class="widthtwo regist">
+				<h1>修 改&nbsp;用&nbsp;户</h1>
+				<form id="form1" action="modifyaccount.do" method="post">
+					<table class="t1">
 
-			</table>
+						<tr>
+							<td>telephone:<input  type="text" class="form-control" name="telephone" /></td>
+						</tr>
 
+						<tr>
+							<td>address:<input  type="text" class="form-control" name="address" /></td>
+						</tr>
+
+						<tr>
+							<td>password:<input id="pass1" type="password" class="form-control" name="password" /></td>
+						</tr>
+						<tr>
+							<td>age:<br/><input id="age" type="text" class="form-control" name="age" style="text-align:center;display:inline;width:15%;margin-right: 8%;" />
+
+								<input type="radio" checked="checked" name="gender" value="2" />female&nbsp;&nbsp;
+								<input type="radio" name="gender" value="1" />male
+							</td>
+						</tr>
+						<tr>
+							<td>
+								address:<input type="text" class="form-control" name="address" />
+			     			</td>
+						</tr>
+						<tr>
+							<td>tel:<input id="tel" type="number" class="form-control" name="telephone" /></td>
+						</tr>
+						<tr class="button1">
+							<td align="center">
+								<button type="button" onclick="check()" class="btn btn-success">submit</button>
+								<button type="reset" class="btn btn-info">reset</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
 		</div>
+		<!--内容部分结束-->
+
 		<!-- 脚部 -->
 		<div id="foot" class="footer">
 			<script type="text/javascript">
@@ -99,3 +109,39 @@
 	</body>
 
 </html>
+<script >
+
+	function check() {
+		var name = $("#name").val();
+		var pass1 = $("#pass1").val();
+		var pass2 = $("#pass2").val();
+		var tel = $("#tel").val();
+		var provincedId = $("#provincedId").val();
+		var cityId = $("#cityId").val();
+		var areaId = $("#areaId").val();
+		if(name.trim() === "") {
+			alert("用户名不许为空");
+			return;
+		}
+		if(pass2.trim() === ""&&pass1.trim()==="") {
+			alert("密码不许为空");
+			return;
+		}
+		if(pass2.trim() !== pass1.trim()){
+			alert("两次输入密码必须相同");
+			return;
+		}
+
+		if(tel.trim() === "") {
+			alert("电话不许为空");
+			return;
+		}
+		if(provincedId === ""&&cityId === ""&&areaId === "") {
+			alert("请选择所在的城市");
+			return;
+		}
+		if(confirm("确认要注册吗")) {
+			$("#form1").submit();
+		}
+	}
+</script>

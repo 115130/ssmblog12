@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title></title>
+		<!-- 引入 Bootstrap -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+		<script src="js/jquery.js"></script>
+		<!-- 包括所有已编译的插件 -->
+		<script src="js/bootstrap.min.js"></script>
+
+		<link rel="stylesheet" href="kindeditor/themes/default/default.css" />
+		<script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
+		<script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
+		<script >
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="c1"]', {
+					allowFileManager: true
+				});
+			});
+
+			function check() {
+				var schema = $("#schema").val();
+				var content = editor.html();
+				if(schema.trim() === "") {
+					alert("schema must be not null");
+					return;
+				}
+				if(content.trim() === "") {
+					alert("content must be not null");
+					return;
+				}
+				$("#c2").val(content);
+				if(confirm("save this blog, are you sure?")) {
+					$("#form1").submit();
+				}
+			}
+		</script>
+
+		<link href="css/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!--导航栏盒子-->
+		<div id="title1" class="d1">
+			<script type="text/javascript">
+				$(function(){
+					$("#title1").load("title.html")
+				})	
+			</script>
+		</div>
+		<!--第一个banner的内容-->
+		<div class="banner1">
+			<div class="container">
+				<h1>博客园</h1>
+				<h2>博客园软件工程师的宝典，让web开发更迅速、简单。</h2>
+				<p class="masthead-button-links">
+					<a class="btn btn-lg btn-primary btn-shadow" href="https://v3.bootcss.com/css/" target="_blank" role="button" onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-Bootstrap3中文文档'])">Bootstrap3中文文档(v3.3.7)</a>
+				</p>
+				<ul class="masthead-links">
+					<li>
+						<a href="https://v3.bootcss.com/css/" target="_blank" role="button" onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-Bootstrap2中文文档'])">Bootstrap2中文文档(v2.3.2)</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--热门社区-->
+		<div class="bc-social">
+			<div class="container">
+				<ul class="bc-social-buttons">
+					<li class="social-forum">
+						<a class="" href="http://wenda.bootcss.com" title="Bootstrap问答社区" target="_blank" onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-Bootstrap问答社区'])">
+							<i class="fa fa-comments"></i> Bootstrap问答社区
+						</a>
+					</li>
+					<li class="social-weibo">
+						<a href="http://weibo.com/bootcss" title="Bootstrap中文网官方微博" target="_blank" onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-新浪微博'])"><i class="fa fa-weibo"></i> 新浪微博：@Bootstrap中文网</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!--中间内容部分开始-->
+		<div class="container allwidth">
+			<div class="create">
+				<h1>修改博客</h1>
+				<form id="form1" action="modifyblog.do" method="post">
+					<input type="hidden" name="type" value="2" />
+					<table class="templatemo-container">
+						<tr>
+							<input th:value="${id}" type="hidden" name="id"/>
+						</tr>
+						<tr>
+							<td>kind:<br />
+								<select  class="form-control" id="kind" name="kind">
+									<div th:each="kind:${kinds}">
+										<option th:value="${kind.kind}" th:text="${kind.kind}"></option>
+									</div>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>schema:<br /> <textarea class="form-control" id="schema" name="schema" style="width: 1024px; resize: none;"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>content:<br /> <textarea class="form-control" id="c1" name="c1" style="width: 1024px; resize: none;" rows="30"></textarea><br />
+								<input name="content" id="c2"  type="hidden" />
+							</td>
+						</tr>
+						<tr>
+							<td align="center"><button type="button" onclick="check()" class="btn btn-success">submit</button></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		<!--内容部分结束-->
+
+		<!-- 脚部 -->
+				<hr>
+				<div id="foot" class="footer">
+					<script type="text/javascript">
+						$(function(){
+							$("#foot").load("foot.html")
+						})
+					</script>
+				</div>
+		<!-- 脚部结束 -->
+	</body>
+
+</html>
